@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped align-middle">
+    <thead class="table-dark">
+      <tr>
+          <th scope="col">Year</th>
+          <th scope="col">Team</th>
+          <th scope="col">FG Attempts</th>
+          <th scope="col">FGs Made</th>
+          <th scope="col">Longest FG</th>
+          <th scope="col">Extra Point Attempts</th>
+          <th scope="col">Extra Points Made</th>
+          <th scope="col">Punts</th>
+          <th scope="col">Punt Yards</th>
+          <th scope="col">Longest Punt</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+        <tr>
+        {% for d in row %}
+            <td>{{ d }}</td>
+        {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null],
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped align-middle">
+    <thead class="table-dark">
+      <tr>
+          <th scope="col">Team</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Team ID</th>
+          <th scope="col">Conference ID</th>
+          <th scope="col">Division ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+        <tr>
+        {% for d in row %}
+            <td>{{ d }}</td>
+        {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          null,
+          null,
+          null,
+          null],
+      });
+    });
+  </script>
+{% endblock %}

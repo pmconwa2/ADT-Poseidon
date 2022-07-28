@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NFL Teams</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Team</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Team ID</th>
+            <th scope="col">Conference ID</th>
+            <th scope="col">Division ID</th>
+        </tr>
+    </thead>
+
+    {% for row in data %}
+        <tr>
+        {% for d in row %}
+            <td>{{ d }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
