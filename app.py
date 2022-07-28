@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():  # put application's code here
-    return render_template("main.html")
+    return render_template("index.html")
 
 
 @app.route('/data/', methods=["GET", "POST"])
