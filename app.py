@@ -1,8 +1,11 @@
 from flask import Flask, render_template
 from dbconnect import connection
+# import sqlalchemy
 
 
 app = Flask(__name__)
+
+# app.config['SQLALCHEMY_DATABASE_URI'] =
 
 
 @app.route('/')
@@ -32,7 +35,7 @@ def offense_page():
     try:
         c, conn = connection()
 
-        query = "SELECT Year, Team, Games, Points, Yards, Plays, YardsPerPlay, PassYards, PassTD, RushYds, RushTD FROM teamoffense"
+        query = """SELECT "Year", "Team", "Games", "Points", "Yards", "Plays", "YardsPerPlay", "PassYards", "PassTD", "RushYds", "RushTD" FROM teamoffense"""
         c.execute(query)
 
         teamO = c.fetchall()
@@ -51,7 +54,7 @@ def interception_page():
     try:
         c, conn = connection()
 
-        query = "SELECT team, year, pointsagainst, yardsagainst, passydsagainst, passtdagainst, rushydsagainst, rushtdagainst, fumblesrecovered, interceptions FROM teamdefense"
+        query = """SELECT "Team", "Year", "PointsAgainst", "YardsAgainst", "PassYdsAgainst", "PassTDAgainst", "RushYdsAgainst", "RushTDAgainst", "FumblesRecovered", "Interceptions" FROM teamdefense"""
         c.execute(query)
 
         ints = c.fetchall()
@@ -70,7 +73,7 @@ def kick_page():
     try:
         c, conn = connection()
 
-        query = "SELECT Year, Team, FGA, FGM, FGLong, XPA, XPM, Punts, PuntYards, PuntLong FROM kick"
+        query = """SELECT "Year", "Team", "FGA", "FGM", "FGLong", "XPA", "XPM", "Punts", "PuntYards", "PuntLong" FROM kick"""
         c.execute(query)
 
         kicks = c.fetchall()
@@ -87,7 +90,7 @@ def advd_page():
     try:
         c, conn = connection()
 
-        query = "SELECT Year, Team, AverageTargetDepth, AirYardsAgainst, YdsAfterContact, Blitzes, QBHurries, Sacks, Pressures, MissedTackles FROM advanceddefense"
+        query = """SELECT "Year", "Team", "AverageTargetDepth", "AirYardsAgainst", "YdsAfterContact", "Blitzes", "QBHurries", "Sacks", "Pressures", "MissedTackles" FROM advanceddefense"""
         c.execute(query)
 
         vance = c.fetchall()
@@ -105,18 +108,18 @@ def advd_page():
 def chi_page():
     try:
         c, conn = connection()
-        query = "SELECT Year, Team, Games, Points, Yards, YardsPerPlay," \
-                "PassYards, PassTD, RushYds, RushTD, Turnovers, 1stDowns," \
-                "Penalties, PenaltyYards FROM teamoffense WHERE Team='Chicago Bears'"
+        query = """SELECT "Year", "Team", "Games", "Points", "Yards", "YardsPerPlay",
+                "PassYards", "PassTD", "RushYds", "RushTD", "Turnovers", "1stDowns",
+                "Penalties", "PenaltyYards" FROM teamoffense WHERE "Team"='Chicago Bears'"""
         c.execute(query)
         bears = c.fetchall()
         conn.close()
 
         c, conn = connection()
-        query = "SELECT team, year, pointsagainst, yardsagainst, passydsagainst," \
-                "passtdagainst, rushydsagainst, rushtdagainst, fumblesrecovered," \
-                "1stdownsagainst, interceptions, defpenalties," \
-                "defpenaltyyds FROM teamdefense WHERE Team='Chicago Bears'"
+        query = """SELECT "Team", "Year", "PointsAgainst", "YardsAgainst", "PassYdsAgainst",
+                "PassTDAgainst", "RushYdsAgainst", "RushTDAgainst", "FumblesRecovered",
+                "1stDownsAgainst", "Interceptions", "DefPenalties",
+                "DefPenaltyYds" FROM teamdefense WHERE "Team"='Chicago Bears'"""
         c.execute(query)
         bearsD = c.fetchall()
         conn.close()
@@ -132,18 +135,18 @@ def teampage(team_id):
     team_id = team_id.replace("_", " ")
 
     c, conn = connection()
-    query = f"""SELECT Year, Team, Games, Points, Yards, YardsPerPlay,
-            PassYards, PassTD, RushYds, RushTD, Turnovers, 1stDowns, Penalties,
-            PenaltyYards FROM teamoffense WHERE Team LIKE '%{team_id}%'"""
+    query = f"""SELECT "Year", "Team", "Games", "Points", "Yards", "YardsPerPlay",
+            "PassYards", "PassTD", "RushYds", "RushTD", "Turnovers", "1stDowns", "Penalties",
+            "PenaltyYards" FROM teamoffense WHERE "Team" LIKE '%{team_id}%'"""
     c.execute(query)
     off = c.fetchall()
     conn.close()
 
     c, conn = connection()
-    query = f"""SELECT team, year, pointsagainst, yardsagainst, passydsagainst,
-            passtdagainst, rushydsagainst, rushtdagainst, fumblesrecovered,
-            1stdownsagainst, interceptions, defpenalties,
-            defpenaltyyds FROM teamdefense WHERE Team LIKE '%{team_id}%'"""
+    query = f"""SELECT "Team", "Year", "PointsAgainst", "YardsAgainst", "PassYdsAgainst",
+                "PassTDAgainst", "RushYdsAgainst", "RushTDAgainst", "FumblesRecovered",
+                "1stDownsAgainst", "Interceptions", "DefPenalties",
+                "DefPenaltyYds" FROM teamdefense WHERE "Team" LIKE '%{team_id}%'"""
     c.execute(query)
     defense = c.fetchall()
     conn.close()
@@ -156,3 +159,4 @@ def teampage(team_id):
 
 if __name__ == '__main__':
     app.run()
+
