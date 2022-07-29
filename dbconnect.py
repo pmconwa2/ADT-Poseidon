@@ -1,11 +1,11 @@
-import MySQLdb
+import psycopg2
 
 
 def connection():
-    conn = MySQLdb.connect(host="localhost",
-                           user="nflapp",
-                           passwd="nflroot",
-                           db="nfl")
+    conn = psycopg2.connect(host="localhost",
+                           database="nfl",
+                           user="postgres",
+                           password="oceanic46&!",
+                            )
     c = conn.cursor()
     return c, conn
-
