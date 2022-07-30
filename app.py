@@ -5,7 +5,7 @@ from dbconnect import connection
 
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] =
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://btifnirlvheggd:456dae0c256c66d5f8b454351412c5dedd3cfa6f9e696a8c229954549fe2c166@ec2-44-208-88-195.compute-1.amazonaws.com:5432/d20atckuunjd6a"
 
 
 @app.route('/')
